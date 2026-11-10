@@ -1,5 +1,5 @@
 variable "ssh_cidr" {
-  description = "Seu IP publico com /32, por exemplo 203.0.113.10/32."
+  description = "187.19.187.45/32"
   type        = string
 
   validation {
