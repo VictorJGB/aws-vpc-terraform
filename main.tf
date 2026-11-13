@@ -8,9 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  access_key = "AKIAQCG7OZ6GVCPXGEUS"
-  secret_key = "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"
-  region     = "us-east-1"
+  region = "us-east-1"
 }
 
 # Rede do ambiente de testes.
@@ -81,7 +79,7 @@ data "aws_ami" "amazon_linux_2" {
   }
 }
 
-# Registra a chave publica; a chave privada permanece no seu computador.
+# Registra a chave publica
 resource "aws_key_pair" "ssh" {
   key_name_prefix = "capacita-"
   public_key      = file(pathexpand(var.public_key_path))
@@ -90,7 +88,7 @@ resource "aws_key_pair" "ssh" {
 # Instancia de testes acessivel via SSH.
 resource "aws_instance" "main" {
   ami                    = data.aws_ami.amazon_linux_2.id
-  instance_type          = "t2.micro"
+  instance_type          = "t3.micro" # Escolhida porque a AWS rejeitou a t2.micro solicitada no projeto por não ser elegível ao Free Tier desta conta.
   subnet_id              = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.ssh.id]
   key_name               = aws_key_pair.ssh.key_name

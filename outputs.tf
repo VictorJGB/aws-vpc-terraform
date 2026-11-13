@@ -1,9 +1,7 @@
 output "public_ip" {
-  description = "IP publico da instancia."
-  value       = aws_instance.main.public_ip
+  value = aws_instance.main.public_ip
 }
 
 output "ssh_command" {
-  description = "Substitua CAMINHO_DA_CHAVE_PRIVADA pelo caminho da sua chave privada."
-  value       = "ssh -i CAMINHO_DA_CHAVE_PRIVADA ec2-user@${aws_instance.main.public_ip}"
+  value = "ssh -i \"C:/Users/victor-suporte/.ssh/id_ed25519\" ec2-user@${aws_instance.main.public_ip}"
 }
